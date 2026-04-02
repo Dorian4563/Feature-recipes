@@ -32,15 +32,20 @@ export default function RecipeCard({ recipe, onClick }) {
   return (
     <div className="recipe-card relative" onClick={() => onClick(recipe.idMeal)}>
 
-      <div className="heart" onClick={toggleFavorite}>
-        {isFav ? "❤️" : "🤍"}
+      <div className="recipe-img-container">
+        <img src={recipe.strMealThumb} className="recipe-img" />
+        
+        <button
+          className="heart-btn"
+          onClick={toggleFavorite}
+        >
+          {isFav ? "❤️" : "🤍"}
+        </button>
       </div>
 
-      <img src={recipe.strMealThumb} className="recipe-img" />
-
       <div className="recipe-content">
-        <p className="recipe-meta">{recipe.strCategory}</p>
         <h3 className="recipe-title">{recipe.strMeal}</h3>
+        <p className="recipe-meta">{recipe.strCategory}</p>
       </div>
 
     </div>

@@ -1,16 +1,75 @@
 @import "tailwindcss";
 @reference "tailwindcss";
 
+.detail-hero {
+  @apply w-full h-[300px] md:h-[400px] object-cover;
+}
+
+.detail-card {
+  @apply bg-white rounded-2xl shadow-xl p-6 md:p-8 -mt-20 relative z-10;
+}
+
+.detail-tags {
+  @apply flex gap-2 mb-3;
+}
+.tag {
+  @apply text-xs px-3 py-1 rounded-full font-medium;
+}
+.tag-green {
+  @apply bg-green-100 text-green-700;
+}
+.tag-yellow {
+  @apply bg-yellow-100 text-yellow-700;
+}
+.tag-gray {
+  @apply bg-gray-200 text-gray-600;
+}
+
+.detail-title {
+  @apply text-2xl md:text-3xl font-bold mt-2;
+}
+.detail-desc {
+  @apply text-gray-600 mt-2 text-sm;
+}
+
+.detail-stats {
+  @apply flex gap-6 mt-4 text-sm text-gray-600;
+}
+
+.detail-grid {
+  @apply grid md:grid-cols-3 gap-6 mt-6;
+}
+
+.ingredients {
+  @apply bg-[#f7f5f2] rounded-xl p-4;
+}
+.ingredients li {
+  @apply py-2 border-b text-sm;
+}
+
+.steps {
+  @apply col-span-2;
+}
+.step {
+  @apply mb-6;
+}
+.step-number {
+  @apply w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold;
+}
+
+.cta-box {
+  @apply bg-yellow-500 text-white rounded-2xl p-6 flex justify-between items-center mt-6;
+}
+.cta-btn {
+  @apply bg-white text-black px-4 py-2 rounded-full;
+}
+
 body {
   @apply bg-[#f7f5f2] text-slate-900 font-sans;
 }
 
 .container {
   @apply max-w-7xl mx-auto px-6;
-}
-
-header {
-  @apply bg-[#f7f5f2] border-b sticky top-0 z-50;
 }
 
 .logo {
@@ -27,7 +86,6 @@ header {
   @apply bg-slate-200 hover:bg-slate-300;
 }
 
-/* ================= HERO ================= */
 .hero-title {
   @apply text-4xl md:text-5xl font-bold leading-tight mt-6;
 }
@@ -119,11 +177,43 @@ header {
 }
 
 .favorites-grid {
-  @apply grid grid-cols-2 md:grid-cols-3 gap-4 mt-6;
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6;
 }
 
-.profile-avatar {
-  @apply w-9 h-9 rounded-full bg-slate-300 flex items-center justify-center font-bold cursor-pointer;
+.section {
+  @apply mt-10;
+}
+
+.favorites-card {
+  @apply rounded-3xl overflow-hidden cursor-pointer transition duration-300 relative;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+}
+
+.favorites-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.heart-btn {
+  @apply absolute top-3 right-3 w-8 h-8 rounded-full bg-white flex items-center justify-center cursor-pointer transition duration-300;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  font-size: 16px;
+  z-index: 10;
+}
+
+.categories-btn {
+  @apply px-6 py-2 bg-[#8B6F47] text-white rounded-full font-semibold transition duration-300 cursor-pointer;
+  border: 2px solid var(--primary);
+}
+
+.categories-btn:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 111, 71, 0.2);
 }
 
 input::placeholder {
