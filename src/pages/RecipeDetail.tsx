@@ -22,17 +22,14 @@ export default function RecipeDetail() {
   return (
     <div>
 
-      {/* HERO IMAGE */}
       <img
         src={recipe.strMealThumb}
         className="detail-hero"
       />
 
-      {/* FLOATING CARD */}
       <div className="container">
         <div className="detail-card">
 
-          {/* TAGS */}
           <div className="detail-tags">
             <span className="tag tag-green">Healthy Choice</span>
             <span className="tag tag-yellow">25 mins</span>
@@ -46,17 +43,14 @@ export default function RecipeDetail() {
             A delicious meal made with fresh ingredients and simple steps.
           </p>
 
-          {/* STATS */}
           <div className="detail-stats">
             <span>420 kcal</span>
             <span>34g protein</span>
             <span>12g carbs</span>
           </div>
 
-          {/* GRID */}
           <div className="detail-grid">
 
-            {/* INGREDIENTS */}
             <div className="ingredients">
               <h3 className="font-semibold mb-2">Ingredients</h3>
               <ul>
@@ -66,7 +60,6 @@ export default function RecipeDetail() {
               </ul>
             </div>
 
-            {/* STEPS */}
             <div className="steps">
 
               <h3 className="font-semibold mb-4">Preparation Steps</h3>

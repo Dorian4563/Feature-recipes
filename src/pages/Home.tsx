@@ -18,7 +18,6 @@ export default function Home() {
       setLoading(false);
     });
 
-    // Listen for global search from navbar
     const handleGlobalSearch = (e) => {
       const query = e.detail;
       if (query.trim()) {
@@ -34,7 +33,6 @@ export default function Home() {
 
   const handleIngredientSearch = async (q) => {
     if (!q) {
-      // Reset to show all recipes when search is empty
       const allRecipes = await getRecipes();
       const filtered = category === "All"
         ? allRecipes
@@ -43,12 +41,10 @@ export default function Home() {
       return;
     }
 
-    // Search for ingredients and chef names
     const allRecipes = await getRecipes();
     const filtered = allRecipes.filter((recipe) => {
       const searchTerm = q.toLowerCase();
 
-      // Search in ingredients (strIngredient1, strIngredient2, etc.)
       let hasIngredient = false;
       for (let i = 1; i <= 20; i++) {
         const ingredient = recipe[`strIngredient${i}`];
@@ -58,7 +54,6 @@ export default function Home() {
         }
       }
 
-      // Search in chef/area (using strArea as chef/cuisine indicator)
       const hasChef = recipe.strArea?.toLowerCase().includes(searchTerm);
 
       return hasIngredient || hasChef;
