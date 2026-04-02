@@ -5,26 +5,40 @@ export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
 
+  const loadFavorites = () => {
+   const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    setFavorites(favorites);
+  };
+  <button
+  onClick={() => navigate("/favorites")}
+  className="relative bg-white p-2 rounded-full shadow"
+>
+  ❤️
+  {favorites.length > 0 && (
+    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 rounded-full">
+      {favorites.length}
+    </span>
+  )}
+</button>
+
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("favorites") || "[]");
-    setFavorites(stored);
+    loadFavorites();
+
+    window.addEventListener("favoritesUpdated", loadFavorites);
+
+    return () => {
+      window.removeEventListener("favoritesUpdated", loadFavorites);
+    };
   }, []);
 
   const removeFavorite = (id) => {
-    const updated = favorites.filter((item) => item.idMeal !== id);
-
+    const updated = favorites.filter((f) => f.idMeal !== id);
     localStorage.setItem("favorites", JSON.stringify(updated));
-
     setFavorites(updated);
   };
 
   if (favorites.length === 0) {
-    return (
-      <div className="container mt-6">
-        <h2 className="text-xl font-bold">Favorites</h2>
-        <p className="mt-4 text-gray-500">No favorites yet ❤️</p>
-      </div>
-    );
+    return <p className="container mt-6">No favorites yet ❤️</p>;
   }
 
   return (
@@ -35,12 +49,12 @@ export default function Favorites() {
         {favorites.map((recipe) => (
           <div key={recipe.idMeal} className="recipe-card relative">
 
-            <button
+            <div
               className="heart"
               onClick={() => removeFavorite(recipe.idMeal)}
             >
               ❌
-            </button>
+            </div>
 
             <img
               src={recipe.strMealThumb}

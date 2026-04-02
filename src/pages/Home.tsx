@@ -9,6 +9,7 @@ export default function Home() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState("All");
+  const [favorites, setFavorites] = useState([]);
 
   const navigate = useNavigate();
 
