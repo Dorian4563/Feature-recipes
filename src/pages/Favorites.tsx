@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import type { Recipe } from "../types";
 
 export default function Favorites() {
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<Recipe[]>([]);
   const navigate = useNavigate();
 
   const loadFavorites = () => {
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]") as Recipe[];
     setFavorites(favorites);
   };
 
@@ -20,7 +21,7 @@ export default function Favorites() {
     };
   }, []);
 
-  const removeFavorite = (id) => {
+  const removeFavorite = (id: string) => {
     const updated = favorites.filter((f) => f.idMeal !== id);
     localStorage.setItem("favorites", JSON.stringify(updated));
     setFavorites(updated);
@@ -74,8 +75,12 @@ export default function Favorites() {
                 style={{
                   backgroundColor: "var(--primary)",
                 }}
-                onMouseEnter={(e) => (e.target.style.backgroundColor = "var(--primary-dark)")}
-                onMouseLeave={(e) => (e.target.style.backgroundColor = "var(--primary)")}
+                onMouseEnter={(e: MouseEvent<HTMLButtonElement>) => {
+                  e.currentTarget.style.backgroundColor = "var(--primary-dark)";
+                }}
+                onMouseLeave={(e: MouseEvent<HTMLButtonElement>) => {
+                  e.currentTarget.style.backgroundColor = "var(--primary)";
+                }}
               >
                 View Recipe
               </button>

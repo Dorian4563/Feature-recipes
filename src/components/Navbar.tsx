@@ -1,6 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { searchRecipes } from "../services/api";
 
 export default function Navbar() {
   const navigate = useNavigate();

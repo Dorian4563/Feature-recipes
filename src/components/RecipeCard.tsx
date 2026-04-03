@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
+import type { Recipe } from "../types";
 
-export default function RecipeCard({ recipe, onClick }) {
-  const [isFav, setIsFav] = useState(false);
+export default function RecipeCard({ recipe, onClick }: { recipe: Recipe; onClick: (id: string) => void }) {
+  const [isFav, setIsFav] = useState<boolean>(false);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("favorites") || "[]");
+    const stored = JSON.parse(localStorage.getItem("favorites") || "[]") as Recipe[];
     const exists = stored.find((f) => f.idMeal === recipe.idMeal);
     setIsFav(!!exists);
   }, [recipe.idMeal]);
 
-  const toggleFavorite = (e) => {
+  const toggleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
-    let stored = JSON.parse(localStorage.getItem("favorites") || "[]");
+    let stored = JSON.parse(localStorage.getItem("favorites") || "[]") as Recipe[];
 
     const exists = stored.find((f) => f.idMeal === recipe.idMeal);
 

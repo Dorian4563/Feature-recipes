@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getRecipeById } from "../services/api";
+import type { Recipe } from "../types";
 
 export default function RecipeDetail() {
-  const { id } = useParams();
-  const [recipe, setRecipe] = useState(null);
+  const { id } = useParams<{ id: string }>();
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
 
   useEffect(() => {
+    if (!id) return;
     getRecipeById(id).then(setRecipe);
   }, [id]);
 
   if (!recipe) return <p className="container mt-6">Loading...</p>;
 
   // Ingredients
-  const ingredients = [];
+  const ingredients: string[] = [];
   for (let i = 1; i <= 10; i++) {
     const ing = recipe[`strIngredient${i}`];
     if (ing) ingredients.push(ing);
