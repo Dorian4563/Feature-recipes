@@ -4,11 +4,12 @@ import RecipeCard from "../components/RecipeCard";
 import IngredientSearchBar from "../components/IngredientSearchBar";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
+import type { Recipe } from "../types";
 
 export default function Home() {
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [category, setCategory] = useState("All");
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [category, setCategory] = useState<string>("All");
 
   const navigate = useNavigate();
 
@@ -18,9 +19,9 @@ export default function Home() {
       setLoading(false);
     });
 
-    const handleGlobalSearch = (e) => {
-      const query = e.detail;
-      if (query.trim()) {
+    const handleGlobalSearch = (e: Event) => {
+      const query = (e as CustomEvent<string>).detail;
+      if (query?.trim()) {
         searchRecipes(query).then(setRecipes);
       } else {
         getRecipes().then(setRecipes);
@@ -31,7 +32,7 @@ export default function Home() {
     return () => window.removeEventListener("globalSearch", handleGlobalSearch);
   }, []);
 
-  const handleIngredientSearch = async (q) => {
+  const handleIngredientSearch = async (q: string) => {
     if (!q) {
       const allRecipes = await getRecipes();
       const filtered = category === "All"
@@ -42,7 +43,7 @@ export default function Home() {
     }
 
     const allRecipes = await getRecipes();
-    const filtered = allRecipes.filter((recipe) => {
+    const filtered = allRecipes.filter((recipe: Recipe) => {
       const searchTerm = q.toLowerCase();
 
       let hasIngredient = false;
